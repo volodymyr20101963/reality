@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('admin.layouts.main')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -10,35 +10,27 @@
                                 <i class="fa fa-close" aria-hidden="true"></i>
                             </a>
                         </div>
-                        <h2>Edit Offer</h2>
+                        <h2>Edit Article</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('offers-edit-submit', $offer->id)}}" enctype="multipart/form-data">
-{{--                            токин (задає ключ), мусить бути обов'язково--}}
+                        <form method="POST" action="{{route('admin-articles-edit-submit', $article->id)}}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Title</label>
+                                <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
                                 <div class="col-md-6">
-                                    <input id="title" name="title" value="{{$offer->title}}" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="price" class="col-md-4 col-form-label text-md-right">Price</label>
-
-                                <div class="col-md-6">
-                                    <input id="price" name="price" value="{{$offer->price}}" class="form-control" placeholder="0.00" />
+                                    <input id="title" name="title" value="{{$article->title}}" class="form-control" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <span  class="col-md-4 col-form-label text-md-right">Images</span>
                                 <div class="col-md-6">
-                                    @foreach($offer->images as $image)
+                                    @foreach($article->images as $image)
                                         <div class="mb-5">
-                                            <a href="{{route('offers-edit-image',[$offer->id,$image->id])}}" class="btn btn-danger">remove</a>
-                                            <img src="{{asset('/storage/offers/'.$offer->id.'/'.$image->name)}}" width="100" height="100">
+                                            <a href="{{route('admin-articles-edit-image',[$article->id,$image->id])}}" class="btn btn-danger">remove</a>
+                                            <img src="{{asset('/storage/article/'.$article->id.'/'.$image->name)}}" width="100" height="100">
                                         </div>
                                     @endforeach
                                 </div>
@@ -54,7 +46,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description" name="description" class="form-control" >{{$offer->description}}</textarea>
+                                    <textarea id="description" name="description" class="form-control" >{{$article->description}}</textarea>
                                 </div>
                             </div>
 

@@ -9,7 +9,7 @@ class UpdateArticlesTable extends Migration
 
     public function up()
     {
-        Schema::table('article', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

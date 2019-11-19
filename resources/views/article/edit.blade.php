@@ -13,7 +13,7 @@
                         <h2>Edit Article</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('article-edit-submit', $article->id)}}">
+                        <form method="POST" action="{{route('article-edit-submit', $article->id)}}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -21,6 +21,24 @@
 
                                 <div class="col-md-6">
                                     <input id="title" name="title" value="{{$article->title}}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <span  class="col-md-4 col-form-label text-md-right">Images</span>
+                                <div class="col-md-6">
+                                    @foreach($article->images as $image)
+                                        <div class="mb-5">
+                                            <a href="{{route('article-edit-image',[$article->id,$image->id])}}" class="btn btn-danger">remove</a>
+                                            <img src="{{asset('/storage/article/'.$article->id.'/'.$image->name)}}" width="100" height="100">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="form-group row">
+                                    <label for="images" class="col-md-4 col-form-label text-md-right">Add Images</label>
+                                    <div class="col-md-6">
+                                        <input type="file" name="images[]" id="images" multiple />
+                                    </div>
                                 </div>
                             </div>
 
@@ -45,5 +63,4 @@
             </div>
         </div>
     </div>
-
 @stop
